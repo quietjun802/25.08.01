@@ -27,8 +27,16 @@ app.post("/users",(req, res)=>{
     }
 })
 
-app.get("/",(req,res)=>{
-    res.send("Hello world!")
+app.get("/users",(req,res)=>{
+    try {
+            res.status(200).json({
+            message: "가져오기 성공!",
+            users
+        });
+    } catch (error) {
+        console.error("사용자 조회중 오류",error)
+        res.status(500).json({message:"서버 내부 오류 발생"})
+    }
 })
 
 app.listen(PORT,()=>{
